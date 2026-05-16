@@ -57,6 +57,63 @@
   background-color: #f8fafc;
 }
 
+.main-content .discover {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  gap: 1rem;
+}
+.main-content .discover .stats-container {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+.main-content .discover .span-nums {
+  font-weight: 700;
+  color: #0f172a;
+  font-size: 26px;
+}
+.main-content .discover .span-stats {
+  display: block;
+  color: #94a3b8;
+  font-size: 13px;
+}
+.main-content .discover h1 {
+  font-size: 54px;
+  font-weight: 700;
+  color: #0f172a;
+}
+.main-content .discover h1 span {
+  display: block;
+  color: #6366f1;
+}
+.main-content .discover p {
+  font-size: 18px;
+  max-width: 400px;
+}
+.main-content .discover .home-buttons {
+  display: flex;
+  gap: 10px;
+}
+.main-content .discover .home-buttons button {
+  padding: 12px 28px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+.main-content .discover .home-buttons .btn1 {
+  background-color: #6366f1;
+  color: white;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.main-content .discover .home-buttons .btn1:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 * {
   padding: 0;
   margin: 0;

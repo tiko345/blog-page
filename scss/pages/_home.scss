@@ -1,3 +1,4 @@
+@use "../abstracts/" as *;
 
 .header{
     display: flex;
@@ -9,7 +10,7 @@
     padding: 0 2rem;
     h2{
         padding-right: 20px;
-        color:#6366f1;
+        color: $color-accent;
     }
 }
 .nav{
@@ -33,24 +34,85 @@
          border-radius: 10px;
     }
     .curent-page{
-        background-color: #f1f5f9;
-        color: #6366f1;
+        background-color: $color-bg-hover;
+        color: $color-accent;
     }
     .register{
-        background-color: #6366f1;
+        background-color: $color-accent;
         color: white;
     }
     .dark-mode{
         border-radius: 50%;
-        background-color: #f8fafc;
+        background-color: $color-surface;
         border: #e2e8f0 1px solid;
     }
 }
 
 .nav ul li a:hover{
-    background-color: #f1f5f9;
-    color:#6366f1;
+    background-color: $color-bg-hover;
+    color:$color-accent;
 }
 .main-content, .footer{
-    background-color: #f8fafc;
+    background-color: $color-surface;
+}
+
+.main-content .discover{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    gap: 1rem;
+    .stats-container{
+        display: flex;
+        flex-direction: row;
+        gap:15px;
+    }
+    .span-nums{
+        font-weight: 700;
+        color: #0f172a;
+        font-size: 26px;
+    }
+    .span-stats{
+        display: block;
+        color: #94a3b8;
+        font-size: 13px;
+    }
+    h1{
+        font-size: 54px;
+        font-weight: 700;
+        color:#0f172a;
+        
+        span{
+            display: block;
+            color: $color-accent;
+        }
+    }
+    p{
+        font-size: 18px;
+        max-width: 400px;
+    }
+    .home-buttons{
+        display: flex;
+        gap: 10px;
+
+        button{
+            padding: 12px 28px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+        }
+        .btn1{
+            background-color: $color-accent;
+            color: white;
+
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+        }
+        .btn1:hover{
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    }
 }
