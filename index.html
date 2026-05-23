@@ -45,7 +45,7 @@
             </div>
             <div class="featured-stories-container">
                 <article class="featured-story1">
-                    <img src="./assets/card1.jpg" alt="Card image">
+                    <img src="./assets/img/card1.jpg" alt="Card image">
                     <span class="image-span">Design</span>
                     <div class="featured-stories-article1-info">
                         <h2>The Art Of Mnimalist Design In Modern Web</h2>
@@ -54,7 +54,7 @@
                     </div>
                 </article>
                 <article class="featured-story2">
-                    <img src="./assets/card2.jpg" alt="Card image">
+                    <img src="./assets/img/card2.jpg" alt="Card image">
                     <div class="featured-stories-article2-info">
                         <span class="image-span2">Code</span>
                         <h4>Understanding CSS Grid: A Complete Guide</h4>
@@ -62,7 +62,7 @@
                     </div>
                 </article>
                 <article class="featured-story3">
-                    <img src="./assets/card3.jpg" alt="Card image">
+                    <img src="./assets/img/card3.jpg" alt="Card image">
                     <div class="featured-stories-article3-info">
                         <span class="image-span2">Code</span>
                         <h4>Why Every Developer Should Learn OOP Principles</h4>
@@ -71,36 +71,44 @@
                 </article>
             </div>
         </section>
-        <section class="Browse-by-category">
-            <h4>Browse by Category</h4>
-            <article>design</article>
-            <article>code</article>
-            <article>technology</article>
-            <article>culture</article>
-            <article>business</article>
-            <article>science</article>
+        <section class="browse">
+            <h2>Browse by Category</h2>
+            <div class="browse-container">
+                <article><div class="icon1"><div></div></div><h4>Design</h4><span>42 articles</span></article>
+                <article><div class="icon2"><div></div></div><h4>Code</h4><span>78 articles</span></article>
+                <article><div class="icon3"><div></div></div><h4>Technology</h4><span>31 articles</span></article>
+                <article><div class="icon4"><div></div></div><h4>Culture</h4><span>19 articles</span></article>
+                <article><div class="icon5"><div></div></div><h4>Business</h4><span>25 articles</span></article>
+                <article><div class="icon6"><div></div></div><h4>Science</h4><span>14 articles</span></article>
+            </div>
         </section>
         <section class="recent-articles">
             <article>
-                <img src="./assets/card1.jpg" alt="Card image">
-                <span>Design</span>
-                <span>5 min read</span>
+                <img src="./assets/img/card1.jpg" alt="Card image">
+                <div class="span-container">
+                    <span class="image-span2">Design</span>
+                    <span class="time-span">5 min read</span>
+                </div>
                 <h4>The Art Of Mnimalist Design In Modern Web</h4>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, voluptate.</p>
                 <span>user</span>
             </article>
             <article>
-                <img src="./assets/card2.jpg" alt="Card image">
-                <span>Code</span>
-                <span>5 min read</span>
+                <img src="./assets/img/card2.jpg" alt="Card image">
+                <div class="span-container">
+                    <span class="image-span2">Code</span>
+                    <span class="time-span">5 min read</span>
+                </div>
                 <h4>The Art Of Mnimalist Design In Modern Web</h4>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, voluptate.</p>
                 <span>user</span>
             </article>
             <article>
-                <img src="./assets/card3.jpg" alt="Card image">
-                <span>Code</span>
-                <span>5 min read</span>
+                <img src="./assets/img/card3.jpg" alt="Card image">
+                <div class="span-container">
+                    <span class="image-span2">Code</span>
+                    <span class="time-span">5 min read</span>
+                </div>
                 <h4>The Art Of Mnimalist Design In Modern Web</h4>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, voluptate.</p>
                 <span>user</span>
@@ -109,47 +117,51 @@
         <section class="stay-in-the-loop">
             <h2>Stay in the loop</h2>
             <p>Get the best articles delivered straight to your inbox every week.</p>
-            <form action="">
-                <input type="email" placeholder="Enter your email address">
-                <button>Subscribe</button>
-                <p>No spam ever. Unsubscribe at any time.</p>
+            <form novalidate action="#">
+                <input type="email" id="email" placeholder="Enter your email address">
+                <button id="subbtn" type="submit">Subscribe</button>
             </form>
+            <p id="errorMsg"></p>
         </section>
     </main>
     <footer class="footer">
-        <section>
-            <h3>Chronicle</h3>
-            <span>a platform for writers...</span>
-            <img src="" alt="icon">
-            <img src="" alt="icon">
-            <img src="" alt="icon">
-            <img src="" alt="icon">
-        </section>
-        <section>
-            <h4>Explore</h4>
-            <span>Home</span>
-            <span>Blog</span>
-            <span>Categories</span>
-            <span>Authors</span>
-        </section>
-        <section>
-            <h4>Explore</h4>
-            <span>Home</span>
-            <span>Blog</span>
-            <span>Categories</span>
-            <span>Authors</span>
-        </section>
-        <section>
-            <h4>Explore</h4>
-            <span>Home</span>
-            <span>Blog</span>
-            <span>Categories</span>
-            <span>Authors</span>
-        </section>
-        <section>
+        <div class="footer-top">
+            <section>
+                <h2 class="logo">Chronicle</h2>
+                <span>A platform for writers, creators, and thinkers to share ideas with the world.</span>
+                <div class="icon-container">
+                    <img src="./assets/svg/twitter-x.svg" alt="icon">
+                    <img src="./assets/svg/facebook.svg" alt="icon">
+                    <img src="./assets/svg/github.svg" alt="icon">
+                    <img src="./assets/svg/linkedin.svg" alt="icon">
+                </div>
+            </section>
+            <section>
+                <h4>Explore</h4>
+                <span><a href="#">Home</a></span>
+                <span><a href="#">Blog</a></span>
+                <span><a href="#">Categories</a></span>
+                <span><a href="#">Authors</a></span>
+            </section>
+            <section>
+                <h4>Acount</h4>
+                <span><a href="#">Sign in</a></span>
+                <span><a href="#">Register</a></span>
+                <span><a href="#">Dashboard</a></span>
+                <span><a href="#">Settings</a></span>
+            </section>
+            <section>
+                <h4>Company</h4>
+                <span><a href="#">About</a></span>
+                <span><a href="#">Privacy</a></span>
+                <span><a href="#">Terms</a></span>
+                <span><a href="#">Contact</a></span>
+            </section>
+        </div>
+        <div class="footer-bottom">
             <span>&copy; 2026 Chronicle. All rights reserved.</span>
             <span>Built with passion for writers everywhere.</span>
-        </section>
+        </div>
     </footer>
 
     <script src="./js/main.js"></script>

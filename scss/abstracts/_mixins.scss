@@ -1,0 +1,42 @@
+@use "./variables" as *;
+
+
+@mixin flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex-row{
+    display: flex;
+    flex-direction: row;
+}
+
+@mixin flex-column{
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin browce-icon($color){
+    @include flex-center;
+    width:  40px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: $color;
+}
+
+@mixin browce-icon-circle($color){
+    position:relative;
+    width: 15px;
+    height: 15px;
+    background-color: $color;
+    border-radius: 50%;
+}
+
+@mixin article-card{
+    position: relative;
+    border-radius: 12px;
+    border: #e2e8f0 1px solid;
+    overflow: hidden;
+    background-color: $color-bg;
+}

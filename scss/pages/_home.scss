@@ -57,7 +57,6 @@
 //main content
 .main-content, .footer{
     background-color: $color-surface;
-    padding: 0 2rem;
 }
 
 //section discover
@@ -69,6 +68,7 @@
     text-align: center;
     padding: 4rem 2rem;
     gap: 1rem;
+    padding: 0 2rem;
     .stats-container{
         display: flex;
         flex-direction: row;
@@ -136,7 +136,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 2rem 0;
-    
+    padding: 0 2rem;
     a{
         text-decoration: none;
         color: $color-accent;
@@ -152,15 +152,13 @@
     gap: 20px;
     max-height: 500px;
     padding-bottom: 5rem;
+    padding: 0 2rem;
     article{
-        position: relative;
-        border-radius: 12px;
-        border: #e2e8f0 1px solid;
-        overflow: hidden;
-        background-color: $color-bg;
+        @include article-card;
     }
     article:hover{
         box-shadow:  0 10px 12px rgba(0,0,0,0.2);
+        transform: scale(1.02);
     }
     .featured-story1 {
         grid-column: 1 / 3;
@@ -206,14 +204,6 @@
                 height: 100px;
                 border-radius: 8px;
             }
-            .image-span2{
-                display: inline-block;
-                padding: 5px 10px;
-                border-radius: 20px;
-                color: #4338ca;
-                background-color: #eef2ff;
-                margin:5px;
-            }
             span{
                 padding: 0 20px;
             }
@@ -222,4 +212,238 @@
             }
         }
     
+}
+.image-span2{
+                display: inline-block;
+                padding: 5px 10px;
+                border-radius: 20px;
+                color: #4338ca;
+                background-color: #eef2ff;
+                margin:5px;
+            }
+
+
+
+// browse section
+
+.browse{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 200px;
+    background-color: #f1f5f9;
+    border: #e2e8f0 1px solid;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    text-align: center;
+
+    h2{
+        padding-bottom: 10px;
+    }
+    .browse-container{
+        @include flex-center;
+        gap: 20px;
+    }
+    article{
+        @include flex-center;
+        flex-direction: column;
+        gap:10px;
+        width:150px;
+        height: 120px;
+        align-content: center;
+        background-color: $color-surface;
+        border-radius: 12px;
+        border: #e2e8f0 1px solid;
+
+        span{
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .icon1{
+            @include browce-icon(#8b5cf620);
+    
+            div{
+               @include browce-icon-circle(#8b5cf6);  
+            }
+
+        }
+
+        .icon2{
+            @include browce-icon(#6366f120);
+    
+            div{
+               @include browce-icon-circle($color-accent);  
+            }
+        }
+        .icon3{
+            @include browce-icon(#0ea5e920);
+    
+            div{
+               @include browce-icon-circle(#0ea5e9);  
+            }
+        }
+        .icon4{
+            @include browce-icon(#10b98120);
+    
+            div{
+               @include browce-icon-circle(#10b981);  
+            }
+        }
+        .icon5{
+            @include browce-icon(#f59e0b20);
+    
+            div{
+               @include browce-icon-circle(#f59e0b);  
+            }
+        }
+        .icon6{
+            @include browce-icon(#ec489920);
+    
+            div{
+               @include browce-icon-circle(#ec4899);  
+            }
+        }
+    }
+    article:hover{
+        box-shadow: 0 10px 12px rgba(0,0,0,0.2);
+        transform: scale(1.05);
+    }
+}
+
+//recent articles section
+.recent-articles{
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:10px;
+    max-height:300px;
+    article{
+        @include article-card;
+        @include flex-column;
+        gap:5px;
+        
+        
+        img{
+            height: 60%;
+            width: 100%;
+            object-fit: cover;
+        }
+        .time-span{
+            display: flex;;
+            border-radius: 40%;
+            background-color: #eef2ff;
+            font-size: 14px;
+            padding: 0 5px;
+            align-items: center;
+            max-height: 30px;
+        }
+        .span-container{
+            @include flex-row;
+            gap:10px;
+            
+        }
+    } 
+
+    article:hover{
+        box-shadow: 0 10px 12px rgba(0,0,0,0.2);
+        transform: scale(1.02);
+    }
+}
+
+//stay in the loop section
+.stay-in-the-loop{
+    @include flex-center;
+    flex-direction: column;
+    gap:10px;
+    height:300px;
+    background-color: $color-accent;
+    color:white;
+    margin-top:50px;
+    
+    p{
+        opacity: 0.8;
+    }
+    form {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    }
+
+    form input {
+        padding: 14px 16px;
+        width: 300px;
+        border: none;
+        border-radius: 10px;
+        outline: none;
+        background-color: #e5e7eb;
+    }
+
+    form button {
+        padding: 14px 20px;
+        border: none;
+        border-radius: 10px;
+        background-color: white;
+        color: $color-accent;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    form button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    #errorMsg{
+        position: relative;
+        color:black;
+        padding: 5px 10px;
+        transform: translate(-60px, -8px);  
+        
+    }
+}
+
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+    }to{
+        opacity: 1;
+    }
+}
+
+//footer 
+.footer{
+    padding: 2rem 2rem 0 2rem ;
+    .footer-top{
+        @include flex-row;
+        justify-content: space-between;
+    }
+    h2{
+        color: $color-accent;
+    }
+    section{
+        @include flex-column;
+        gap:10px;
+         
+    }
+    .icon-container{
+        @include flex-row;
+        gap:10px;
+    }
+    .footer-bottom{
+        display: flex;
+        border-top: lightgray 1px solid;
+        margin-top: 20px;
+        height: 50px;
+        align-items: center;
+        justify-content: space-between;
+
+    }
+    span{
+        opacity: 0.6;
+        a{
+            text-decoration: none;
+            color:black;
+        }
+    }
 }
