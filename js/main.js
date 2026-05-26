@@ -38,3 +38,13 @@ toggle.addEventListener("click", () => {
     html.setAttribute("data-theme", isDark ? "light" : "dark");
     toggle.textContent = isDark ? "◑" : "☀";
 });
+
+//menu toggle for mobile version
+
+const menuToggle = document.getElementById("menu-toggle");
+const nav = document.querySelector(".nav");
+
+menuToggle.addEventListener("click", () => {
+    nav.classList.toggle("open");
+    menuToggle.textContent = nav.classList.contains("open") ? "✕" : "☰";
+});
