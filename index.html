@@ -1,13 +1,188 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chronicle</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    
+    <header class="header">
+        <h2>Chronicle</h2>
+        <nav class="nav">
+            <a href="#" id="menu-toggle">☰</a>
+            <ul class="nav-links1">
+                <li><a href="#" class="curent-page">Home</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="./register.html" class="register">Register</a></li>
+            </ul>
+            <ul class="nav-links2">
+                <li><a href="#" id="theme-toggle">◑</a></li>
+                <li><a href="#">Sign in</a></li>
+                <li><a href="./register.html" class="register">Register</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main-content">
+        <section class="discover">
+        <span>✦ Discover great writing</span>
+        <h1>Ideas worth reading, <span>stories worth sharing</span></h1>
+        <p>Chronicle brings together the best writers and readers.
+             Explore thousands of articles across every topic.</p>
+        <div class="home-buttons">
+            <button class="btn1">Start reading</button>
+            <button class="btn2">Start writing</button>
+        </div>
+        <div class="stats-container">
+            <span class="span-nums">12k+ <span class="span-stats">Articles</span></span>
+            <span class="span-nums">3.4k <span class="span-stats">Writers</span></span>
+            <span class="span-nums">48k <span class="span-stats">Readers</span></span>
+        </div>
+        </section>
+        <section class="featured-stories">
+            <div class="featured-header">
+                <h2>Featured Stories</h2>
+                <span><a href="#">View all →</a></span>
+            </div>
+            <div class="featured-stories-container">
+                <article class="featured-story1">
+                    <img src="./assets/img/card1.jpg" alt="Card image">
+                    <span class="image-span">Design</span>
+                    <div class="featured-stories-article1-info">
+                        <h2>The Art Of Mnimalist Design In Modern Web</h2>
+                        <p>A deep dive into the principles that separate good design from great design — and how minimalism shapes user perception in the digital age.</p>
+                        <span>user</span>
+                    </div>
+                </article>
+                <article class="featured-story2">
+                    <img src="./assets/img/card2.jpg" alt="Card image">
+                    <div class="featured-stories-article2-info">
+                        <span class="image-span2">Code</span>
+                        <h4>Understanding CSS Grid: A Complete Guide</h4>
+                        <span>Marco T. · 8 min read</span>
+                    </div>
+                </article>
+                <article class="featured-story3">
+                    <img src="./assets/img/card3.jpg" alt="Card image">
+                    <div class="featured-stories-article3-info">
+                        <span class="image-span2">Code</span>
+                        <h4>Why Every Developer Should Learn OOP Principles</h4>
+                        <span>Sara K. · 6 min read</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <section class="browse">
+            <h2>Browse by Category</h2>
+            <div class="browse-container">
+                <article><div class="icon1"><div></div></div><h4>Design</h4><span>42 articles</span></article>
+                <article><div class="icon2"><div></div></div><h4>Code</h4><span>78 articles</span></article>
+                <article><div class="icon3"><div></div></div><h4>Technology</h4><span>31 articles</span></article>
+                <article><div class="icon4"><div></div></div><h4>Culture</h4><span>19 articles</span></article>
+                <article><div class="icon5"><div></div></div><h4>Business</h4><span>25 articles</span></article>
+                <article><div class="icon6"><div></div></div><h4>Science</h4><span>14 articles</span></article>
+            </div>
+        </section>
+        <section class="recent-articles">
+            <article>
+                <img src="./assets/img/card1.jpg" alt="Card image">
+                <div class="span-container">
+                    <span class="image-span2">Design</span>
+                    <span class="time-span">5 min read</span>
+                </div>
+                <h4>The Art Of Mnimalist Design In Modern Web</h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, voluptate.</p>
+                <span>user</span>
+            </article>
+            <article>
+                <img src="./assets/img/card2.jpg" alt="Card image">
+                <div class="span-container">
+                    <span class="image-span2">Code</span>
+                    <span class="time-span">5 min read</span>
+                </div>
+                <h4>The Art Of Mnimalist Design In Modern Web</h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, voluptate.</p>
+                <span>user</span>
+            </article>
+            <article>
+                <img src="./assets/img/card3.jpg" alt="Card image">
+                <div class="span-container">
+                    <span class="image-span2">Code</span>
+                    <span class="time-span">5 min read</span>
+                </div>
+                <h4>The Art Of Mnimalist Design In Modern Web</h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, voluptate.</p>
+                <span>user</span>
+            </article>
+        </section>
+        <section class="stay-in-the-loop">
+            <h2>Stay in the loop</h2>
+            <p>Get the best articles delivered straight to your inbox every week.</p>
+            <form novalidate action="#">
+                <input type="email" id="email" placeholder="Enter your email address">
+                <button id="subbtn" type="submit">Subscribe</button>
+            </form>
+            <p id="errorMsg"></p>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer-top">
+            <section>
+                <h2 class="logo">Chronicle</h2>
+                <span>A platform for writers, creators, and thinkers to share ideas with the world.</span>
+                <div class="icon-container">
+                    <img src="./assets/svg/twitter-x.svg" alt="icon">
+                    <img src="./assets/svg/facebook.svg" alt="icon">
+                    <img src="./assets/svg/github.svg" alt="icon">
+                    <img src="./assets/svg/linkedin.svg" alt="icon">
+                </div>
+            </section>
+            <section>
+                <h4>Explore</h4>
+                <span><a href="#">Home</a></span>
+                <span><a href="#">Blog</a></span>
+                <span><a href="#">Categories</a></span>
+                <span><a href="#">Authors</a></span>
+            </section>
+            <section>
+                <h4>Acount</h4>
+                <span><a href="#">Sign in</a></span>
+                <span><a href="#">Register</a></span>
+                <span><a href="#">Dashboard</a></span>
+                <span><a href="#">Settings</a></span>
+            </section>
+            <section>
+                <h4>Company</h4>
+                <span><a href="#">About</a></span>
+                <span><a href="#">Privacy</a></span>
+                <span><a href="#">Terms</a></span>
+                <span><a href="#">Contact</a></span>
+            </section>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 Chronicle. All rights reserved.</span>
+            <span>Built with passion for writers everywhere.</span>
+        </div>
+    </footer>
+    <nav class="mobile-nav">
+        <a href="#" class="active">
+            <span>⌂</span>
+            <span class="span-text">Home</span>
+        </a>
+        <a href="#">
+            <span>☰</span>
+            <span  class="span-text">Menu</span>
+        </a>
+        <a href="#">
+            <span>◎</span>
+            <span class="span-text">profile</span>
+        </a>
+        <a href="#">
+            <span>⚙</span>
+            <span class="span-text">Settings</span>
+        </a>
+    </nav>
 
     <script src="./js/main.js"></script>
 </body>
