@@ -1,0 +1,41 @@
+@use "../abstracts/" as *;
+
+.main-content-register{
+     background-color: var(--color-surface);
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     height: calc(100vh - 4rem);
+     
+}
+.register-side-info{
+    border-right: var(--color-border) 1px solid;
+    background: linear-gradient(135deg, #6366f1,#ec4899);
+    color: var(--color-text-dark);
+    padding: 2rem;
+
+    span{
+        opacity: 0.8;
+        font-size: 16px;
+    }
+    .text-container{
+        position: relative;
+        top:100px;
+        width: 450px;
+    }
+    h2{
+        font-size:32px;
+    }
+
+    .span-container{
+        @include flex-column;
+        line-height: 25px;
+    }
+}
+
+.register-container{
+    color: var(--color-text);
+    .hidden{
+        display: none;
+    }
+}
+

@@ -696,6 +696,44 @@ body {
     display: flex;
   }
 }
+.main-content-register {
+  background-color: var(--color-surface);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: calc(100vh - 4rem);
+}
+
+.register-side-info {
+  border-right: var(--color-border) 1px solid;
+  background: linear-gradient(135deg, #6366f1, #ec4899);
+  color: var(--color-text-dark);
+  padding: 2rem;
+}
+.register-side-info span {
+  opacity: 0.8;
+  font-size: 16px;
+}
+.register-side-info .text-container {
+  position: relative;
+  top: 100px;
+  width: 450px;
+}
+.register-side-info h2 {
+  font-size: 32px;
+}
+.register-side-info .span-container {
+  display: flex;
+  flex-direction: column;
+  line-height: 25px;
+}
+
+.register-container {
+  color: var(--color-text);
+}
+.register-container .hidden {
+  display: none;
+}
+
 * {
   padding: 0;
   margin: 0;
