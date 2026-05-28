@@ -12,7 +12,7 @@
             <nav class="nav">
                 <a href="#" id="menu-toggle">☰</a>
                 <ul class="nav-links1">
-                    <li><a href="#" class="curent-page">Home</a></li>
+                    <li><a href="./index.html">Home</a></li>
                     <li><a href="#">Blog</a></li>
                     <li><a href="#">Dashboard</a></li>
                     <li><a href="./register.html" class="register">Register</a></li>
@@ -38,53 +38,55 @@
                 </div>
             </section>
             <section class="register-container">
-                <h2 id="signin-title" >Welcome back</h2>
-                <h2 id="register-title" class="hidden">Create your account</h2>
-                <h2 id="reset-password" class="hidden">Reset Password</h2>
-                <span id="signin-span" >Sign in to continue to Chronicle</span>
-                <span id="register-span" class="hidden">Start writing and sharing today</span>
-                <span id="reset-span"  class="hidden">Enter your email and we will send you instructions to reset your password.</span>
-                <div class="auth-tabs">
-                    <button class="tab active" id="signin-tab">Sign in</button>
-                    <button class="tab" id="register-tab">Register</button>
-                </div>
-                <form id="signin-form">
-                    <button type="button">continue with Google</button>
-                    <span>or continue with Email</span>
-                    <label for="email-signin">Email Address</label>
-                    <input type="email" id="email-signin" placeholder="you@example.com" required>
-                    <label for="password-signin">Password</label>
-                    <a class="forgotpass">Forgot password?</a>
-                    <input type="password" id="password-signin" placeholder="at least 8 characters" required>
-                     <div class="checkbox-container">
-                        <input type="checkbox" id="remember">
-                        <label for="remember">Remember me for 30 days</label>
+                <div class="forms-container">
+                    <h2 id="signin-title" >Welcome back</h2>
+                    <h2 id="register-title" class="hidden">Create your account</h2>
+                    <h2 id="reset-password" class="hidden">Reset Password</h2>
+                    <span id="signin-span" >Sign in to continue to Chronicle</span>
+                    <span id="register-span" class="hidden">Start writing and sharing today</span>
+                    <span id="reset-span"  class="hidden">Enter your email and we will send you instructions to reset your password.</span>
+                    <div class="auth-tabs">
+                        <button class="tab active" id="signin-tab">Sign in</button>
+                        <button class="tab" id="register-tab">Register</button>
                     </div>
-                    <button type="submit">Sign In</button>
-                </form>
-                <form id="register-form" class="hidden">
-                    <button type="button">continue with Google</button>
-                    <span>or continue with Email</span>
-                    <label for="fullName">Full Name</label>
-                    <input type="text" id="fullName" placeholder="John Doe" required>
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="you@example.com" required>
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="at least 8 characters" required>
-                    <label for="confPassword">Confirm Password</label>
-                    <input type="password" id="confPassword" placeholder="Repeat your password" required>
-                    <div class="checkbox-container">
-                        <input type="checkbox" id="terms" required>
-                        <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
-                    </div>
-                    <button type="submit">Create Account</button>
-                </form>
-                 <form id="reset-form" class="hidden">
-                    <label for="reset">Email Address</label>
-                    <input type="email" id="reset" placeholder="you@example.com" required>
-                    <button type="submit">Send Reset Link</button>
-                    <span><a class="back-to-login active">back to login</a></span>
-                 </form>
+                    <button type="button" class="google">G continue with Google</button>
+                    <span class="google-span">or continue with Email</span>
+                        <form id="signin-form">
+                            <label for="email-signin">Email Address</label>
+                            <input type="email" id="email-signin" placeholder="you@example.com" required>
+                            <div class="label-row">
+                                <label for="password-signin">Password</label>
+                                <a class="forgotpass">Forgot password?</a>
+                            </div>
+                            <input type="password" id="password-signin" placeholder="at least 8 characters" required>
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="remember">
+                                <span>Remember me for 30 days</span>
+                            </div>
+                            <button type="submit" class="signin-btn">Sign In</button>
+                        </form>
+                        <form id="register-form" class="hidden">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" placeholder="John Doe" required>
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="you@example.com" required>
+                            <label for="password">Password</label>
+                            <input type="password" id="password" placeholder="at least 8 characters" required>
+                            <label for="confPassword">Confirm Password</label>
+                            <input type="password" id="confPassword" placeholder="Repeat your password" required>
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="terms" required>
+                                <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                            </div>
+                            <button type="submit" class="signup-btn">Create Account</button>
+                        </form>
+                        <form id="reset-form" class="hidden">
+                            <label for="reset">Email Address</label>
+                            <input type="email" id="reset" placeholder="you@example.com" required>
+                            <button type="submit" class="reset-link">Send Reset Link</button>
+                            <span><a class="back-to-login active">back to login</a></span>
+                        </form>
+                 </div>
             </section>
         </main>
 

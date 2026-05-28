@@ -69,6 +69,8 @@ const forgotLink = document.querySelector(".forgotpass");
 const authTabs=document.querySelector(".auth-tabs");
 const allTitles = ["signin-title", "register-title", "reset-password"];
 const allSpans = ["signin-span", "register-span", "reset-span"];
+const googleBtn = document.querySelector(".google");
+const googleSpan = document.querySelector(".google-span");
 
 function showForm(formToShow, titleId, spanId, showTabs){
     //hide all forms
@@ -85,8 +87,11 @@ function showForm(formToShow, titleId, spanId, showTabs){
     document.getElementById(titleId).classList.remove("hidden");
     document.getElementById(spanId).classList.remove("hidden");
 
-    //show or hide tabs
-    showTabs ? authTabs.classList.remove("hidden") : authTabs.classList.add("hidden");
+    authTabs.classList.toggle("hidden", !showTabs);
+
+    // google elements
+    googleBtn.classList.toggle("hidden", !showTabs);
+    googleSpan.classList.toggle("hidden", !showTabs);
 }
 
 
@@ -103,7 +108,12 @@ registerTab.addEventListener("click", () => {
 });
 
 forgotLink.addEventListener("click", () => {
+    console.log("clicked");
+
     showForm(resetForm, "reset-password", "reset-span", false);
+
+    console.log(googleBtn);
+    console.log(googleSpan);
 });
 
 document.querySelector(".back-to-login").addEventListener("click", () => {
