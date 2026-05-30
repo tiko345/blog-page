@@ -12,15 +12,15 @@
             </section>
             <section>
                 <h4>Explore</h4>
-                <span><a href="#">Home</a></span>
-                <span><a href="#">Blog</a></span>
+                <span><a href="./index.php">Home</a></span>
+                <span><a href="./articles.php">Blog</a></span>
                 <span><a href="#">Categories</a></span>
                 <span><a href="#">Authors</a></span>
             </section>
             <section>
                 <h4>Acount</h4>
-                <span><a href="#">Sign in</a></span>
-                <span><a href="#">Register</a></span>
+                <span><a href="./register.php">Sign in</a></span>
+                <span><a href="./register.php">Register</a></span>
                 <span><a href="#">Dashboard</a></span>
                 <span><a href="#">Settings</a></span>
             </section>
@@ -39,7 +39,6 @@
     </footer>
 
 
-//mobile navigation
     <nav class="mobile-nav">
         <a href="#" class="active">
             <span>⌂</span>

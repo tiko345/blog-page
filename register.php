@@ -1,11 +1,41 @@
+<?php
+require './config/db.php';
+//handles input from register form and registers the user in the database
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])) {
+    $username = trim($_POST['username']);
+    $email    = trim($_POST['email']);
+    $password = $_POST['password'];
+    $confirm  = $_POST['confirm_password'];
+
+    // basic validation
+    if (empty($username) || empty($email) || empty($password)) {
+        $error = 'All fields are required';
+    }elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = 'Please enter a valid email address';
+    } elseif ($password !== $confirm) {
+        $error = 'Passwords do not match';
+    } else {
+        // hash the password 
+        $hashed = password_hash($password, PASSWORD_BCRYPT);
+
+        // insert into database
+        $stmt = $conn->prepare("INSERT INTO users (UserName, Email, Password, Role) VALUES (?, ?, ?, 'user')");
+        $stmt->bind_param('sss', $username, $email, $hashed);
+
+        if ($stmt->execute()) {
+            $success = 'Account created successfully';
+        } else {
+            $error = 'Username or email already taken';
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Chronicle</title>
-        <link rel="stylesheet" href="./css/style.css">
-    </head> 
+     <?php
+        require_once "./templates/head.php"
+    ?>
     <body>
         <?php
             require_once "./templates/header.php"
@@ -39,27 +69,27 @@
                     <span class="google-span">or continue with Email</span>
                         <form id="signin-form" action="self">
                             <label for="email-signin">Email Address</label>
-                            <input type="email" id="email-signin" placeholder="you@example.com" required>
+                            <input type="email" name="email" id="email-signin" placeholder="you@example.com" required>
                             <div class="label-row">
                                 <label for="password-signin">Password</label>
                                 <a class="forgotpass">Forgot password?</a>
                             </div>
-                            <input type="password" id="password-signin" placeholder="at least 8 characters" required>
+                            <input type="password" name="password" id="password-signin" placeholder="at least 8 characters" required>
                             <div class="checkbox-container">
                                 <input type="checkbox" id="remember">
                                 <span>Remember me for 30 days</span>
                             </div>
                             <button type="submit" class="signin-btn">Sign In</button>
                         </form>
-                        <form id="register-form" class="hidden" action="self">
-                            <label for="fullName">Full Name</label>
-                            <input type="text" id="fullName" placeholder="John Doe" required>
+                        <form id="register-form" class="hidden" action="" method="post">
+                            <label for="fullName" >User Name</label>
+                            <input type="text" id="fullName" name="username" placeholder="John Doe" required>
                             <label for="email">Email Address</label>
-                            <input type="email" id="email" placeholder="you@example.com" required>
+                            <input type="email" id="email" name="email" placeholder="you@example.com" required>
                             <label for="password">Password</label>
-                            <input type="password" id="password" placeholder="at least 8 characters" required>
+                            <input type="password" id="password" name="password" placeholder="at least 8 characters" required>
                             <label for="confPassword">Confirm Password</label>
-                            <input type="password" id="confPassword" placeholder="Repeat your password" required>
+                            <input type="password" id="confPassword" name="confirm_password" placeholder="Repeat your password" required>
                             <div class="checkbox-container">
                                 <input type="checkbox" id="terms" required>
                                 <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
@@ -68,7 +98,7 @@
                         </form>
                         <form id="reset-form" class="hidden" action="self">
                             <label for="reset">Email Address</label>
-                            <input type="email" id="reset" placeholder="you@example.com" required>
+                            <input type="email" name="email" id="reset" placeholder="you@example.com" required>
                             <button type="submit" class="reset-link">Send Reset Link</button>
                             <span><a class="back-to-login active">back to login</a></span>
                         </form>
