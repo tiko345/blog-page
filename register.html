@@ -51,7 +51,7 @@
                     </div>
                     <button type="button" class="google">G continue with Google</button>
                     <span class="google-span">or continue with Email</span>
-                        <form id="signin-form">
+                        <form id="signin-form" action="self">
                             <label for="email-signin">Email Address</label>
                             <input type="email" id="email-signin" placeholder="you@example.com" required>
                             <div class="label-row">
@@ -65,7 +65,7 @@
                             </div>
                             <button type="submit" class="signin-btn">Sign In</button>
                         </form>
-                        <form id="register-form" class="hidden">
+                        <form id="register-form" class="hidden" action="self">
                             <label for="fullName">Full Name</label>
                             <input type="text" id="fullName" placeholder="John Doe" required>
                             <label for="email">Email Address</label>
@@ -80,7 +80,7 @@
                             </div>
                             <button type="submit" class="signup-btn">Create Account</button>
                         </form>
-                        <form id="reset-form" class="hidden">
+                        <form id="reset-form" class="hidden" action="self">
                             <label for="reset">Email Address</label>
                             <input type="email" id="reset" placeholder="you@example.com" required>
                             <button type="submit" class="reset-link">Send Reset Link</button>

@@ -696,11 +696,23 @@ body {
     display: flex;
   }
 }
+@media (max-width: 810px) {
+  body, html {
+    width: 100%;
+    overflow-x: hidden;
+  }
+}
 .main-content-register {
   background-color: var(--color-surface);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: calc(100vh - 4rem);
+  min-height: calc(100vh - 4rem);
+}
+@media (max-width: 810px) {
+  .main-content-register {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 5fr;
+  }
 }
 
 .register-side-info {
@@ -726,6 +738,14 @@ body {
   flex-direction: column;
   line-height: 25px;
 }
+@media (max-width: 810px) {
+  .register-side-info {
+    width: 100vw;
+  }
+  .register-side-info .span-container, .register-side-info h2, .register-side-info h1, .register-side-info span {
+    display: none;
+  }
+}
 
 .register-container {
   display: flex;
@@ -733,12 +753,21 @@ body {
   align-items: center;
   color: var(--color-text);
   background-color: var(--color-bg);
+  position: relative;
+  overflow-y: auto;
+  padding: 2rem 0;
+}
+@media (max-width: 810px) {
+  .register-container {
+    width: 100vw;
+  }
 }
 .register-container .hidden {
   display: none !important;
 }
 .register-container .auth-tabs {
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   background-color: var(--color-bg-hover);
@@ -762,7 +791,8 @@ body {
 }
 .register-container .google {
   cursor: pointer;
-  width: 500px;
+  max-width: 500px;
+  width: 100%;
   padding: 10px 15px;
   background-color: var(--color-bg);
   color: var(--color-text);
@@ -793,7 +823,8 @@ body {
 }
 .register-container #email-signin, .register-container #password-signin, .register-container #fullName, .register-container #email,
 .register-container #password, .register-container #confPassword, .register-container #reset {
-  width: 470px;
+  max-width: 470px;
+  width: 100%;
   padding: 15px;
   background-color: var(--color-bg);
   color: var(--color-text);
@@ -802,7 +833,9 @@ body {
   margin: 10px 0;
 }
 .register-container .forms-container {
-  width: 500px;
+  max-width: 500px;
+  width: 100%;
+  padding: 0 1rem;
 }
 .register-container .label-row {
   display: flex;
@@ -815,7 +848,8 @@ body {
 }
 .register-container .signin-btn, .register-container .signup-btn, .register-container .reset-link {
   cursor: pointer;
-  width: 500px;
+  max-width: 500px;
+  width: 100%;
   padding: 10px 20px;
   background-color: var(--color-accent);
   color: var(--color-text);
@@ -825,10 +859,16 @@ body {
 }
 .register-container .back-to-login {
   position: absolute;
-  top: 35%;
-  right: 40%;
+  top: 25%;
+  left: 5%;
   cursor: pointer;
   color: var(--color-accent);
+}
+@media (max-width: 810px) {
+  .register-container .back-to-login {
+    top: 20%;
+    left: 10%;
+  }
 }
 
 * {
