@@ -2,7 +2,6 @@
 
 
 
-
 body{
     color: var(--color-text);
 }
@@ -53,10 +52,6 @@ body{
         color: var(--color-text);
          padding: 10px 15px;
          border-radius: 10px;
-    }
-    .curent-page{
-        background-color: var(--color-bg-hover);
-        color: var(--color-accent);
     }
     .register{
         background-color: var(--color-accent);
@@ -550,7 +545,7 @@ body{
 
 //footer 
 .footer{
-    padding: 2rem 2rem 0 2rem ;
+    padding:2rem 0;
     background-color: var(--color-article);
     .footer-top{
         @include flex-row;
