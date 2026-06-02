@@ -1,5 +1,36 @@
 <?php
-require './config/db.php';
+    session_start();
+    require_once './config/db.php';
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
+        $email    = trim($_POST['login-email']);
+        $password = $_POST['login-password'];
+
+    if (empty($email) || empty($password)) {
+        $loginError = 'All fields are required';
+    } else {
+        $stmt = $conn->prepare("SELECT * FROM users WHERE Email = ?");
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $user = $stmt->get_result()->fetch_assoc();
+
+        
+
+        if ($user && password_verify($password, $user['Password'])) {
+            $_SESSION['user_id']  = $user['Id'];
+            $_SESSION['username'] = $user['UserName'];
+            $_SESSION['role']     = $user['Role'];
+
+            header('Location: ./user_dashboard.php');
+            exit;
+        } else {
+            $loginError = 'Invalid email or password';
+        }
+    }
+    }
+?>
+
+<?php
 //handles input from register form and registers the user in the database
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])) {
     $username = trim($_POST['username']);
@@ -34,6 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])) {
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
      <?php
+        $currentPage='register';
         require_once "./templates/head.php"
     ?>
     <body>
@@ -67,19 +99,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])) {
                     </div>
                     <button type="button" class="google">G continue with Google</button>
                     <span class="google-span">or continue with Email</span>
-                        <form id="signin-form" action="self">
+                        <form id="signin-form" action="" method="post">
                             <label for="email-signin">Email Address</label>
-                            <input type="email" name="email" id="email-signin" placeholder="you@example.com" required>
+                            <input type="email" name="login-email" id="email-signin" placeholder="you@example.com" required>
                             <div class="label-row">
                                 <label for="password-signin">Password</label>
                                 <a class="forgotpass">Forgot password?</a>
                             </div>
-                            <input type="password" name="password" id="password-signin" placeholder="at least 8 characters" required>
+                            <input type="password" name="login-password" id="password-signin" placeholder="at least 8 characters" required>
                             <div class="checkbox-container">
                                 <input type="checkbox" id="remember">
-                                <span>Remember me for 30 days</span>
+                                <span>Remember me for 30 days</span> 
                             </div>
-                            <button type="submit" class="signin-btn">Sign In</button>
+                            <?php if (isset($loginError)): ?>
+                                <p class="error"><?php echo $loginError; ?></p>
+                            <?php endif; ?>
+                            <button type="submit" name="login" class="signin-btn">Sign In</button>
                         </form>
                         <form id="register-form" class="hidden" action="" method="post">
                             <label for="fullName" >User Name</label>

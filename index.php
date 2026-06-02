@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
     <?php
-        require_once "./templates/head.php"
+        session_start();
+        require_once "./templates/head.php";
     ?>
 <body>
     <?php
-     require_once "./templates/header.php"
+     $currentPage='home';
+     require_once "./templates/header.php";
+     require_once './config/db.php';
     ?>
     <main class="main-content">
         <section class="discover">
@@ -14,8 +17,8 @@
         <p>Chronicle brings together the best writers and readers.
              Explore thousands of articles across every topic.</p>
         <div class="home-buttons">
-            <button class="btn1">Start reading</button>
-            <button class="btn2">Start writing</button>
+            <button class="btn1"  onclick="window.location.href='<?php echo isset($_SESSION['user_id']) ? './articles.php' : './register.php'; ?>'">Start reading</button>
+            <button class="btn2" onclick="window.location.href='<?php echo isset($_SESSION['user_id']) ? './user_dashboard.php' : './register.php'; ?>'">Start writing</button>
         </div>
         <div class="stats-container">
             <span class="span-nums">12k+ <span class="span-stats">Articles</span></span>
