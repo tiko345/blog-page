@@ -9,6 +9,51 @@
      $currentPage='home';
      require_once "./templates/header.php";
      require_once './config/db.php';
+
+        
+    // fetch 3 latest published articles for featured section
+    $stmt = $conn->prepare("
+        SELECT articles.Id, articles.Title, articles.Content, users.UserName
+        FROM articles
+        JOIN users ON articles.user_id = users.Id
+        WHERE articles.status = 'published'
+        ORDER BY articles.createdat DESC
+        LIMIT 3
+    ");
+    $stmt->execute();
+    $featuredArticles = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+    // fetch articles by category for recent section
+    $stmt = $conn->prepare("
+        SELECT articles.Id, articles.Title, articles.Content, 
+            users.UserName, categories.Name as category
+        FROM articles
+        JOIN users ON articles.user_id = users.Id
+        LEFT JOIN article_categories ON articles.Id = article_categories.article_id
+        LEFT JOIN categories ON article_categories.category_id = categories.Id
+        WHERE articles.status = 'published'
+        ORDER BY articles.createdat DESC
+        LIMIT 3
+    ");
+    $stmt->execute();
+    $recentArticles = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+    // fetch categories with article counts
+    $stmt = $conn->query("
+        SELECT categories.Id, categories.Name, COUNT(article_categories.article_id) as count
+        FROM categories
+        LEFT JOIN article_categories ON categories.Id = article_categories.category_id
+        GROUP BY categories.Id
+    ");
+    $categoryList = $stmt->fetch_all(MYSQLI_ASSOC);
+
+
+    function articleLink(int $id): string {
+        if (isset($_SESSION['user_id'])) {
+            return "./read.php?id=$id";
+        }
+        return "./register.php";
+    }
     ?>
     <main class="main-content">
         <section class="discover">
@@ -32,75 +77,73 @@
                 <span><a href="#">View all →</a></span>
             </div>
             <div class="featured-stories-container">
-                <article class="featured-story1">
-                    <img src="./assets/img/card1.jpg" alt="Card image">
-                    <span class="image-span">Design</span>
-                    <div class="featured-stories-article1-info">
-                        <h2>The Art Of Mnimalist Design In Modern Web</h2>
-                        <p>A deep dive into the principles that separate good design from great design — and how minimalism shapes user perception in the digital age.</p>
-                        <span>Caroline F.</span>
-                    </div>
-                </article>
-                <article class="featured-story2">
-                    <img src="./assets/img/card2.jpg" alt="Card image">
-                    <div class="featured-stories-article2-info">
-                        <span class="image-span2">Code</span>
-                        <h4>Understanding CSS Grid: A Complete Guide</h4>
-                        <span>Marco T. · 8 min read</span>
-                    </div>
-                </article>
-                <article class="featured-story3">
-                    <img src="./assets/img/card3.jpg" alt="Card image">
-                    <div class="featured-stories-article3-info">
-                        <span class="image-span2">Code</span>
-                        <h4>Why Every Developer Should Learn OOP Principles</h4>
-                        <span>Sara K. · 6 min read</span>
-                    </div>
-                </article>
+                <?php if (!empty($featuredArticles)): ?>
+                    <?php foreach ($featuredArticles as $i => $article): ?>
+                        <?php if ($i === 0): ?>
+                            <article class="featured-story1">
+                                <img src="./assets/img/card1.jpg" alt="Card image">
+                                <div class="featured-stories-article1-info">
+                                    <h2>
+                                        <a href="<?php echo articleLink($article['Id']); ?>">
+                                            <?php echo $article['Title']; ?>
+                                        </a>
+                                    </h2>
+                                    <p><?php echo substr($article['Content'], 0, 150) . '...'; ?></p>
+                                    <span><?php echo $article['UserName']; ?></span>
+                                </div>
+                            </article>
+                        <?php else: ?>
+                            <article class="featured-story<?php echo $i + 1; ?>">
+                                <img src="./assets/img/card<?php echo $i + 1; ?>.jpg" alt="Card image">
+                                <div class="featured-stories-article<?php echo $i + 1; ?>-info">
+                                    <h4>
+                                        <a href="<?php echo articleLink($article['Id']); ?>">
+                                            <?php echo $article['Title']; ?>
+                                        </a>
+                                    </h4>
+                                    <span>By <?php echo $article['UserName']; ?></span>
+                                </div>
+                            </article>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
         </section>
         <section class="browse">
             <h2>Browse by Category</h2>
             <div class="browse-container">
-                <article><div class="icon1"><div></div></div><h4>Design</h4><span>42 articles</span></article>
-                <article><div class="icon2"><div></div></div><h4>Code</h4><span>78 articles</span></article>
-                <article><div class="icon3"><div></div></div><h4>Technology</h4><span>31 articles</span></article>
-                <article><div class="icon4"><div></div></div><h4>Culture</h4><span>19 articles</span></article>
-                <article><div class="icon5"><div></div></div><h4>Business</h4><span>25 articles</span></article>
-                <article><div class="icon6"><div></div></div><h4>Science</h4><span>14 articles</span></article>
+                <?php if (!empty($categoryList)): ?>
+                    <?php foreach ($categoryList as $cat): ?>
+                        <article>
+                            <div class="icon"><div></div></div>
+                            <h4>
+                                <a href="articles.php?category=<?php echo urlencode($cat['Name']); ?>">
+                                    <?php echo $cat['Name']; ?>
+                                </a>
+                            </h4>
+                            <span><?php echo $cat['count']; ?> articles</span>
+                        </article>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
         </section>
         <section class="recent-articles">
-            <article>
-                <img src="./assets/img/card1.jpg" alt="Card image">
-                <div class="span-container">
-                    <span class="image-span2">Design</span>
-                    <span class="time-span">5 min read</span>
-                </div>
-                <h4>The Art Of Mnimalist Design In Modern Web</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, voluptate.</p>
-                <span>user</span>
-            </article>
-            <article>
-                <img src="./assets/img/card2.jpg" alt="Card image">
-                <div class="span-container">
-                    <span class="image-span2">Code</span>
-                    <span class="time-span">5 min read</span>
-                </div>
-                <h4>The Art Of Mnimalist Design In Modern Web</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, voluptate.</p>
-                <span>user</span>
-            </article>
-            <article>
-                <img src="./assets/img/card3.jpg" alt="Card image">
-                <div class="span-container">
-                    <span class="image-span2">Code</span>
-                    <span class="time-span">5 min read</span>
-                </div>
-                <h4>The Art Of Mnimalist Design In Modern Web</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, voluptate.</p>
-                <span>user</span>
-            </article>
+            <?php if (!empty($recentArticles)): ?>
+                <?php foreach ($recentArticles as $i => $article): ?>
+                    <article>
+                        <img src="./assets/img/card<?php echo ($i % 3) + 1; ?>.jpg" alt="Card image">
+                        <div class="article-content">
+                            <h4>
+                                <a href="<?php echo articleLink($article['Id']); ?>">
+                                    <?php echo $article['Title']; ?>
+                                </a>
+                            </h4>
+                            <p><?php echo substr($article['Content'], 0, 80) . '...'; ?></p>
+                            <span class="article-author">By <?php echo $article['UserName']; ?></span>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </section>
         <section class="stay-in-the-loop">
             <h2>Stay in the loop</h2>
