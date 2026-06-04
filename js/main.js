@@ -141,7 +141,7 @@ if (signinTab) {
 
 
 //dashboard navigation 
-const navItems = document.querySelectorAll('.user-aside .nav-item')
+const navItems = document.querySelectorAll('.dashboard-aside .nav-item')
 if (navItems.length > 0) {
     const sections = document.querySelectorAll('.dashboard-content .section')
 
@@ -162,13 +162,100 @@ if (navItems.length > 0) {
 }
 
 //redirects the new article button to the upload section of the dashboard
-document.querySelector('.new-article').addEventListener('click', function(e) {
-    e.preventDefault();
-    // Switch section
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    document.getElementById('upload').classList.add('active');
+const newArticleBtn = document.querySelector('.new-article')
+if (newArticleBtn) {
+    newArticleBtn.addEventListener('click', function(e) {
+        e.preventDefault()
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'))
+        document.getElementById('upload').classList.add('active')
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'))
+        document.querySelector('.nav-item[data-section="upload"]').classList.add('active')
+    })
+}
 
-    // Update sidebar active state
-    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-    document.querySelector('.nav-item[data-section="upload"]').classList.add('active');
+
+//filter users in admin dashboard
+const userSearch = document.getElementById('user-search')
+const roleFilter = document.getElementById('role-filter')
+
+function filterUsers() {
+    const search = userSearch.value.toLowerCase()
+    const role = roleFilter.value
+
+    document.querySelectorAll('.user-row-table').forEach(row => {
+        const name = row.getAttribute('data-name')
+        const email = row.getAttribute('data-email')
+        const userRole = row.getAttribute('data-role')
+
+        const matchesSearch = name.includes(search) || email.includes(search)
+        const matchesRole = role === '' || userRole === role
+
+        row.style.display = matchesSearch && matchesRole ? '' : 'none'
+    })
+}
+
+if (userSearch) {
+    userSearch.addEventListener('input', filterUsers)
+    roleFilter.addEventListener('change', filterUsers)
+}
+
+
+
+//write note modal
+function openNote(userId, existingNote) {
+    document.getElementById('note-user-id').value = userId
+    document.getElementById('note-textarea').value = existingNote
+    document.getElementById('note-modal').classList.remove('hidden')
+}
+
+function closeNote() {
+    document.getElementById('note-modal').classList.add('hidden')
+}
+
+// close on backdrop click
+const noteModal = document.getElementById('note-modal')
+if (noteModal) {
+    noteModal.addEventListener('click', (e) => {
+        if (e.target === noteModal) closeNote()
+    })
+}
+
+
+//view note modal 
+function viewNote(note, username) {
+    document.getElementById('view-note-username').textContent = username
+    document.getElementById('view-note-content').textContent = note
+    document.getElementById('view-note-modal').classList.remove('hidden')
+}
+
+function closeViewNote() {
+    document.getElementById('view-note-modal').classList.add('hidden')
+}
+
+const viewNoteModal = document.getElementById('view-note-modal')
+if (viewNoteModal) {
+    viewNoteModal.addEventListener('click', (e) => {
+        if (e.target === viewNoteModal) closeViewNote()
+    })
+}
+
+//edit article modal
+document.addEventListener('click', function(e) {
+    const editBtn = e.target.closest('.edit-btn');
+    if (editBtn) {
+        document.getElementById('edit_article_id').value = editBtn.dataset.id;
+        document.getElementById('edit_title').value = editBtn.dataset.title;
+        document.getElementById('edit_content').value = editBtn.dataset.content;
+        document.getElementById('editModal').classList.add('active');
+    }
+
+    const closeBtn = e.target.closest('.cancel-btn');
+    if (closeBtn) {
+        document.getElementById('editModal').classList.remove('active');
+    }
+
+    // close on backdrop click
+    if (e.target.id === 'editModal') {
+        document.getElementById('editModal').classList.remove('active');
+    }
 });

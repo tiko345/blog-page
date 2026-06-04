@@ -59,10 +59,9 @@
         $stmt->execute();
         $recentArticles = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-
         //get all the articles
         $stmt = $conn->prepare("
-            SELECT articles.Id, articles.Title, articles.createdat, articles.status,
+            SELECT articles.Id, articles.Title, articles.createdat, articles.Content, articles.status,
                 COUNT(DISTINCT likes.user_id) as like_count,
                 COUNT(DISTINCT comments.id) as comment_count
             FROM articles
@@ -75,10 +74,54 @@
         $stmt->bind_param('i', $_SESSION['user_id']);
         $stmt->execute();
         $myArticles = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+        //saving the changes of the article
+        if(isset($_POST['save_article_changes'])){
+            $articleId = $_POST['edit_article_id'];
+            $title = $_POST['edit_title'];
+            $content = $_POST['edit_content'];
+
+            $stmt = $conn->prepare("
+                UPDATE articles
+                SET Title=?, Content=?
+                WHERE Id=? AND user_id=?
+            ");
+
+            $stmt->bind_param(
+                "ssii",
+                $title,
+                $content,
+                $articleId,
+                $_SESSION['user_id']
+            );
+
+            $stmt->execute();
+
+            header("Location: user_dashboard.php");
+            exit;
+        }
+
+        if(isset($_POST['publish_article'])){
+            $articleId = $_POST['article_id'];
+            $stmt = $conn->prepare("
+                UPDATE articles
+                SET status = 'published'
+                WHERE Id = ? AND user_id = ?
+            ");
+            $stmt->bind_param(
+                "ii",
+                $articleId,
+                $_SESSION['user_id']
+            );
+            $stmt->execute();
+
+            header("Location: user_dashboard.php");
+            exit;
+        }
     ?>
     <div class="dashboard-container">
-        <aside class="user-aside">
-            <div class="author-cont">
+        <aside class="dashboard-aside">
+            <div class="dashboard-cont">
                 <p class="user"> <?php echo strtoupper(substr($_SESSION['username'], 0, 1)); ?></p>
                 <div>
                     <span class="author">Author <?php echo $_SESSION['username'];?></span>
@@ -157,9 +200,28 @@
                             <div class="my-article-stats">
                                 <span><?php echo $article['like_count']; ?> likes
                                 <?php echo $article['comment_count']; ?> comments</span>
-                                <span class="status-badge <?php echo $article['status']; ?>">
-                                    <?php echo ucfirst($article['status']); ?>
-                                </span>
+                                <div class="article-actions">
+                                    <span class="status-badge <?php echo $article['status']; ?>">
+                                        <?php echo ucfirst($article['status']); ?>
+                                    </span>
+
+                                    <?php if($article['status'] === 'draft'): ?>
+                                        <form method="POST">
+                                            <input type="hidden" name="article_id" value="<?php echo $article['Id']; ?>">
+                                            <button type="submit" name="publish_article" class="publish-btn">
+                                                Publish
+                                            </button>
+                                        </form>
+                                    <?php endif; ?>
+
+                                    <button
+                                        type="button" class="edit-btn"
+                                        data-id="<?php echo $article['Id']; ?>"
+                                        data-title="<?php echo htmlspecialchars($article['Title'], ENT_QUOTES); ?>"
+                                        data-content="<?php echo htmlspecialchars($article['Content'], ENT_QUOTES); ?>">
+                                        Edit
+                                    </button>
+                                </div>
                             </div>
                         </article>
                     <?php endforeach; ?>
@@ -204,7 +266,37 @@
             </section>
         </main>
     </div>
+    <div id="editModal" class="edit-modal">
+        <div class="edit-modal-content">
+            <h2>Edit Article</h2>
+            <form method="POST">
+                <input type="hidden" name="edit_article_id" id="edit_article_id">
 
+                <label>Title</label>
+                <input type="text" name="edit_title" id="edit_title">
+
+                <label>Content</label>
+                <textarea
+                    name="edit_content"
+                    id="edit_content"
+                    rows="12">
+                </textarea>
+                <div class="modal-buttons">
+                    <button type="submit" name="save_article_changes">
+                        Save Changes
+                    </button>
+                    <button
+                        type="button"
+                        class="cancel-btn">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+        <?php
+        require_once "./templates/footer.php";
+        ?>
     <script src="./js/main.js"></script>
 </body>
 </html>

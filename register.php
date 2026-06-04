@@ -21,7 +21,11 @@
             $_SESSION['username'] = $user['UserName'];
             $_SESSION['role']     = $user['Role'];
 
-            header('Location: ./user_dashboard.php');
+            if ($user['Role'] === 'admin') {
+                header('Location: ./admin_dashboard.php');
+            } else {
+                header('Location: ./user_dashboard.php');
+            }
             exit;
         } else {
             $loginError = 'Invalid email or password';
