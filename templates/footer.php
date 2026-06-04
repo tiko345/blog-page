@@ -21,7 +21,7 @@
                 <h4>Acount</h4>
                 <span><a href="./register.php">Sign in</a></span>
                 <span><a href="./register.php">Register</a></span>
-                <span><a href="#">Dashboard</a></span>
+                <span><a href="<?php echo $dashboardLink; ?>">Dashboard</a></span>
                 <span><a href="#">Settings</a></span>
             </section>
             <section>
@@ -40,7 +40,7 @@
 
 
     <nav class="mobile-nav">
-        <a href="#" class="active">
+        <a href="./index.php" class="active">
             <span>⌂</span>
             <span class="span-text">Home</span>
         </a>
@@ -48,7 +48,7 @@
             <span>☰</span>
             <span  class="span-text">Menu</span>
         </a>
-        <a href="#">
+         <a href="<?php echo $dashboardLink; ?>">
             <span>◎</span>
             <span class="span-text">profile</span>
         </a>
